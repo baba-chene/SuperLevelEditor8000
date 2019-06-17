@@ -41,7 +41,7 @@ public final class LevelPanel extends JPanel implements MouseListener, MouseMoti
 		setPreferredSize(new Dimension(512,512));
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		
+		createBoxes();
 		width = 20;
 		height = 20;		
 		margin = 10;
@@ -81,7 +81,7 @@ public final class LevelPanel extends JPanel implements MouseListener, MouseMoti
 	
 	private void paintBox(Graphics g, String[][] map, int i, int j) {
 			
-		switch((map[i][j]) {
+		switch(map[i][j]) {
 		
 		case "rock" : 
 			listBox[i][j].paintRockBox(g);
@@ -145,9 +145,5 @@ public final class LevelPanel extends JPanel implements MouseListener, MouseMoti
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+}

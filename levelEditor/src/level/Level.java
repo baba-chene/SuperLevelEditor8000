@@ -34,5 +34,10 @@ public class Level {
 		}
 	}
 
+	public String[][] getMap() {
+		
+		return map;
+	}
+
 	
 }
