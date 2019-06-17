@@ -13,7 +13,16 @@ public class SaveAsMenuItem extends JMenuItem {
 		//this.mazeFrame = mazeFrame;
 		
 		this.addActionListener(e -> {
-			
+			JFileChooser fc = new JFileChooser();
+			fc.showSaveDialog(editorFrame);
+			File file= fc.getSelectedFile();
+			fc.setDialogTitle("Specify a file to save"); 
+			try {
+				editorFrame.save(file.getAbsolutePath());
+				System.out.println(file.getName());
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
 		});
 	}
 }
