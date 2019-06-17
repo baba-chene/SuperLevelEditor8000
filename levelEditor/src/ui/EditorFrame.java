@@ -6,6 +6,8 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
+import level.Level;
+
 
 public class EditorFrame extends JFrame {
 	
@@ -14,10 +16,12 @@ public class EditorFrame extends JFrame {
 	private final LevelPreview levelPreview;
 	private final ObjectList objectList;
 	private String currentObject;
+	private Level level;
 	
-	public EditorFrame (Editor editor) {
+	public EditorFrame (Editor editor, Level level) {
 		
 		this.editor=editor;
+		this.level=level;
 		setVisible(true);
 		setLayout(new BorderLayout());
 		
@@ -26,7 +30,7 @@ public class EditorFrame extends JFrame {
 		setJMenuBar(fileMenuBar);
 		
 		//level preview
-		levelPreview = new LevelPreview(this);
+		levelPreview = new LevelPreview(this,level);
 		
 		//buttonList
 		objectList = new ObjectList(this);

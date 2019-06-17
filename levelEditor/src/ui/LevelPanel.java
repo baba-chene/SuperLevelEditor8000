@@ -38,14 +38,15 @@ public final class LevelPanel extends JPanel implements MouseListener, MouseMoti
 		setBackground(Color.WHITE);
 		this.level = level;
 		
-		setPreferredSize(new Dimension(512,512));
+		setPreferredSize(new Dimension(800,1200));
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		createBoxes();
+		
 		width = 20;
 		height = 20;		
 		margin = 10;
-						
+		listBox = new Box[this.level.hauteur][this.level.largeur];
+		createBoxes();
 				
 	}
 	
@@ -70,7 +71,7 @@ public final class LevelPanel extends JPanel implements MouseListener, MouseMoti
 		for (int i = 0; i < level.hauteur; i++) {
 			
 			for (int j = 0; j < level.largeur; j++) {
-				listBox[i][j] = new Box (margin+i*(height+1),margin+j*(width+1),width,height);
+				listBox[i][j] = new Box(margin+i*(height+1),margin+j*(width+1),width,height);
 	
 			}
 		}
@@ -107,19 +108,35 @@ public final class LevelPanel extends JPanel implements MouseListener, MouseMoti
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		int abscissClick = e.getX();
+		int ordinateClick = e.getY();
+		int abscissMaze = (abscissClick-10)/21;
+		int ordinateMaze = (ordinateClick-10)/21;
+		
+		System.out.println(abscissMaze);
+		System.out.println(ordinateMaze);
 		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stubscissClick-10)/21;
+	
+
 		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		int abscissClick = e.getX();
+		int ordinateClick = e.getY();
+		int abscissMaze = (abscissClick-10)/21;
+		int ordinateMaze = (ordinateClick-10)/21;
 		
+		System.out.println(abscissMaze);
+		System.out.println(ordinateMaze);
+		
+
 	}
 
 	@Override
