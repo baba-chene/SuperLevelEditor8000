@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.BorderLayout;
+
 import java.awt.Container;
 import java.awt.Dimension;
 
@@ -14,14 +15,17 @@ public class EditorFrame extends JFrame {
 	private final Editor editor;
 	private final FileMenuBar fileMenuBar;
 	private final LevelPreview levelPreview;
-	private final ObjectList objectList;
+	private final SelectionPanel selectionPanel;
 	private String currentObject;
+	private String currentMode;
 	private Level level;
+	private boolean isKeyWord;
 	
 	public EditorFrame (Editor editor, Level level) {
 		
 		this.editor=editor;
 		this.level=level;
+		isKeyWord=false;
 		setVisible(true);
 		setLayout(new BorderLayout());
 		
@@ -33,11 +37,11 @@ public class EditorFrame extends JFrame {
 		levelPreview = new LevelPreview(this,level);
 		
 		//buttonList
-		objectList = new ObjectList(this);
+		selectionPanel = new SelectionPanel(this);
 		
 		Container c = getContentPane();
 		c.add(levelPreview, BorderLayout.CENTER);
-		c.add(objectList, BorderLayout.EAST);
+		c.add(selectionPanel, BorderLayout.EAST);
 		
 		setPreferredSize(new Dimension(1820, 900));
 		pack();
@@ -47,12 +51,30 @@ public class EditorFrame extends JFrame {
 	public void setCurrentObject(String object) {
 		currentObject=object;		
 	}
+	
+	
+	public void setCurrentMode(String mode) {
+		currentMode=mode;		
+	}
+	
 
 	public void save(String absolutePath) {
 		editor.save(absolutePath);
 		
 	}
 	
+	// Pour savoir quel bloc il faut placer
+	public String getSelectedObject() {
+		if(currentMode=="text" && !isKeyWord) {
+			return "text"+currentObject;	
+		}
+		return currentObject;		
+	}
+
+	public void setIsKeyWord(boolean b) {
+		isKeyWord = b;
+		
+	}
 	
 	
 	

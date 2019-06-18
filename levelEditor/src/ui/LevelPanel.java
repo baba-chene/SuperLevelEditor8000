@@ -106,7 +106,7 @@ public final class LevelPanel extends JPanel implements MouseListener, MouseMoti
 
 	
 	@Override
-	public void mouseDragged(MouseEvent arg0) {
+	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
 		int abscissClick = e.getX();
 		int ordinateClick = e.getY();

@@ -5,7 +5,9 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 public class ObjectList extends JPanel {
 
@@ -16,12 +18,12 @@ public class ObjectList extends JPanel {
 		
 		super();
 		this.editorFrame= editorFrame;
-		setLayout(new GridLayout(50, 2));
+		setLayout(new GridLayout(30, 1));
 		setPreferredSize(new Dimension(200, 800));
 		
 		
 		//Initialisation des choix
-		ArrayList<ObjectButton> radioButtons = new ArrayList<ObjectButton>();
+		ArrayList<JRadioButton> radioButtons = new ArrayList<JRadioButton>();
 		
 		radioButtons.add(new ObjectButton("empty", editorFrame, true));
 		radioButtons.add(new ObjectButton("baba", editorFrame, false));
@@ -31,12 +33,26 @@ public class ObjectList extends JPanel {
 		radioButtons.add(new ObjectButton("lava", editorFrame, false));
 		radioButtons.add(new ObjectButton("flag", editorFrame, false));
 		
+		radioButtons.add(new ObjectButton("", editorFrame, false));
+		
+		radioButtons.add(new KeyWordButton("IS", editorFrame, false));
+		radioButtons.add(new KeyWordButton("HAS", editorFrame, false));
+		radioButtons.add(new KeyWordButton("AND", editorFrame, false));
+		radioButtons.add(new KeyWordButton("YOU", editorFrame, false));
+		radioButtons.add(new KeyWordButton("US", editorFrame, false));
+		radioButtons.add(new KeyWordButton("BLOCK", editorFrame, false));
+		radioButtons.add(new KeyWordButton("PUSH", editorFrame, false));
+		radioButtons.add(new KeyWordButton("SINK", editorFrame, false));
+		radioButtons.add(new KeyWordButton("WIN", editorFrame, false));
+		radioButtons.add(new KeyWordButton("DEFEAT", editorFrame, false));
+		
+		
 		ObjectButtonGroup radioButtonGroup = new ObjectButtonGroup(radioButtons);
 		this.objectButtonGroup = radioButtonGroup;
 	
-
+		add(new JLabel("	Elements"));
 		
-		for (ObjectButton e : radioButtons){
+		for (JRadioButton e : radioButtons){
 			add(e);
 		}
 	}
