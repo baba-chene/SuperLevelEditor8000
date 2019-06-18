@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -58,8 +60,8 @@ public class EditorFrame extends JFrame {
 	}
 	
 
-	public void save(String absolutePath) {
-		editor.save(absolutePath);
+	public void save(String absolutePath) throws FileNotFoundException {
+		level.save(absolutePath);
 		
 	}
 	
@@ -73,6 +75,11 @@ public class EditorFrame extends JFrame {
 
 	public void setIsKeyWord(boolean b) {
 		isKeyWord = b;
+		
+	}
+
+	public void open(String absolutePath) throws IOException {
+		level.open(absolutePath);
 		
 	}
 	

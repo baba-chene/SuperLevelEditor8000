@@ -19,38 +19,31 @@ public class ObjectList extends JPanel {
 		super();
 		this.editorFrame= editorFrame;
 		setLayout(new GridLayout(30, 1));
-		setPreferredSize(new Dimension(200, 800));
+		setPreferredSize(new Dimension(100, 700));
 		
 		
 		//Initialisation des choix
 		ArrayList<JRadioButton> radioButtons = new ArrayList<JRadioButton>();
 		
-		radioButtons.add(new ObjectButton("empty", editorFrame, true));
-		radioButtons.add(new ObjectButton("baba", editorFrame, false));
-		radioButtons.add(new ObjectButton("wall", editorFrame, false));
-		radioButtons.add(new ObjectButton("water", editorFrame, false));
-		radioButtons.add(new ObjectButton("rock", editorFrame, false));
-		radioButtons.add(new ObjectButton("lava", editorFrame, false));
-		radioButtons.add(new ObjectButton("flag", editorFrame, false));
+		radioButtons.add(new ObjectButton("---ELEMENTS---", editorFrame, false));
 		
-		radioButtons.add(new ObjectButton("", editorFrame, false));
+		for(int i=0; i< Editor.elements.length ;i++) {
+			String element=Editor.elements[i];
+			radioButtons.add(new ObjectButton(element, editorFrame, i==0));
+		}
 		
-		radioButtons.add(new KeyWordButton("IS", editorFrame, false));
-		radioButtons.add(new KeyWordButton("HAS", editorFrame, false));
-		radioButtons.add(new KeyWordButton("AND", editorFrame, false));
-		radioButtons.add(new KeyWordButton("YOU", editorFrame, false));
-		radioButtons.add(new KeyWordButton("US", editorFrame, false));
-		radioButtons.add(new KeyWordButton("BLOCK", editorFrame, false));
-		radioButtons.add(new KeyWordButton("PUSH", editorFrame, false));
-		radioButtons.add(new KeyWordButton("SINK", editorFrame, false));
-		radioButtons.add(new KeyWordButton("WIN", editorFrame, false));
-		radioButtons.add(new KeyWordButton("DEFEAT", editorFrame, false));
+		radioButtons.add(new ObjectButton("---KEY WORDS---", editorFrame, false));
+		
+		for(int i=0; i< Editor.keyWords.length ;i++) {
+			String kw=Editor.keyWords[i];
+			radioButtons.add(new KeyWordButton(kw, editorFrame, false));
+		}
 		
 		
 		ObjectButtonGroup radioButtonGroup = new ObjectButtonGroup(radioButtons);
 		this.objectButtonGroup = radioButtonGroup;
 	
-		add(new JLabel("	Elements"));
+		//add(new JLabel("	Elements"));
 		
 		for (JRadioButton e : radioButtons){
 			add(e);

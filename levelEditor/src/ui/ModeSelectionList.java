@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ModeSelectionList extends JPanel{
@@ -15,8 +16,8 @@ public class ModeSelectionList extends JPanel{
 		
 		super();
 		this.editorFrame= editorFrame;
-		setLayout(new GridLayout(1, 2));
-		setPreferredSize(new Dimension(100, 50));
+		setLayout(new GridLayout(3, 1));
+		setPreferredSize(new Dimension(100, 80));
 		
 
 		ArrayList<ModeSelectionButton> radioButtons = new ArrayList<ModeSelectionButton>();
@@ -26,8 +27,9 @@ public class ModeSelectionList extends JPanel{
 		
 		ModeSelectionButtonGroup radioButtonGroup = new ModeSelectionButtonGroup(radioButtons);
 		this.objectButtonGroup = radioButtonGroup;
-	
-
+		JLabel lbl = new JLabel("Mode (only for elements)");
+		
+		add(lbl);
 		
 		for (ModeSelectionButton e : radioButtons){
 			add(e);
