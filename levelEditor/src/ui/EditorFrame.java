@@ -13,7 +13,7 @@ public class EditorFrame extends JFrame {
 	
 	private final Editor editor;
 	private final FileMenuBar fileMenuBar;
-	private final LevelPreview levelPreview;
+	private final LevelPanel levelPanel;
 	private final ObjectList objectList;
 	private String currentObject;
 	private Level level;
@@ -30,13 +30,13 @@ public class EditorFrame extends JFrame {
 		setJMenuBar(fileMenuBar);
 		
 		//level preview
-		levelPreview = new LevelPreview(this,level);
+		levelPanel = new LevelPanel(level,editor);
 		
 		//buttonList
 		objectList = new ObjectList(this);
 		
 		Container c = getContentPane();
-		c.add(levelPreview, BorderLayout.CENTER);
+		c.add(levelPanel, BorderLayout.CENTER);
 		c.add(objectList, BorderLayout.EAST);
 		
 		setPreferredSize(new Dimension(1820, 900));
@@ -51,6 +51,15 @@ public class EditorFrame extends JFrame {
 	public void save(String absolutePath) {
 		editor.save(absolutePath);
 		
+	}
+
+	public String getSelectedObject() {
+		return "rock";
+	}
+
+	public void notifyForUpdate() {
+		
+		levelPanel.notifyForUpdate();
 	}
 	
 	

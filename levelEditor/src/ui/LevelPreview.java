@@ -11,20 +11,29 @@ import level.Level;
 
 public class LevelPreview extends JPanel {
 
-	private final EditorFrame editorFrame;
+
 	private Level level;
 	private LevelPanel levelPanel;
+	private Editor editor;
 	
-	
-	public LevelPreview(EditorFrame editorFrame, Level level) {
+	public LevelPreview(EditorFrame editorFrame, Level level,Editor editor) {
 			
 			super();
 			
-			this.editorFrame = editorFrame;
+			
 			this.level = level;
-			levelPanel = new LevelPanel(this,level);
-			setBackground(Color.BLACK);
-			setPreferredSize(new Dimension(800, 1200));
+			this.editor = editor;
+			levelPanel = new LevelPanel(level, this.editor);
+			
 		}
+
+
+	public void notifyForUpdate() {
+		levelPanel.notifyForUpdate();
+		
+	}
+	
+	
+	
 	
 }

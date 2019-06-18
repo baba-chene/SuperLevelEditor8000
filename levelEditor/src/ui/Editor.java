@@ -1,5 +1,7 @@
 package ui;
 
+import java.awt.Component;
+
 import level.Level;
 
 public class Editor {
@@ -16,6 +18,17 @@ public class Editor {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void notifyForUpdate() {
+		editorFrame.notifyForUpdate();
+	}
+
+	public EditorFrame getEditorFrame() {
+		
+		return editorFrame;
+	}
+	
+	
 	
 	
 	

@@ -24,118 +24,71 @@ import java.util.Set;
 @SuppressWarnings("serial")
 public final class LevelPanel extends JPanel implements MouseListener, MouseMotionListener
 {
-	private final LevelPreview levelPreview;
 	private Level level;
-	private Box[][] listBox;
 	int width;
 	int height;
 	int margin;
+	Graphics  g;
+
+	Editor editor;
 	
-	public LevelPanel(LevelPreview levelPreview, Level level)
+	
+	public LevelPanel( Level level, Editor editor)
 	{
 		super();
-		this.levelPreview = levelPreview;
-		setBackground(Color.WHITE);
 		this.level = level;
-		
-		setPreferredSize(new Dimension(800,1200));
+		this.editor = editor;
+		editor.getEditorFrame().addMouseListener(this);
+		editor.getEditorFrame().addMouseMotionListener(this);
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		
-		width = 20;
-		height = 20;		
-		margin = 10;
-		listBox = new Box[this.level.hauteur][this.level.largeur];
-		createBoxes();
-				
+		width = level.getWidth();
+		height = level.getHeight();		
+		margin = level.getMargin();
+		
 	}
 	
 	@Override
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		for (int i=0;i<level.hauteur;i++) {
-			for (int j = 0; j< level.largeur; j++) {
-				
-				paintBox(g,level.getMap(),i,j);
-				
-				
-			}
-			
-		}
-		
+		level.paintBoxes(g);
 	}
-	private void createBoxes() {
-
-		
-		for (int i = 0; i < level.hauteur; i++) {
-			
-			for (int j = 0; j < level.largeur; j++) {
-				listBox[i][j] = new Box(margin+i*(height+1),margin+j*(width+1),width,height);
-	
-			}
-		}
-		
-	}
-	
-	
-	
-	private void paintBox(Graphics g, String[][] map, int i, int j) {
-			
-		switch(map[i][j]) {
-		
-		case "rock" : 
-			listBox[i][j].paintRockBox(g);
-		case "lava" : 
-			listBox[i][j].paintLavaBox(g);
-		case "flag" : 
-			listBox[i][j].paintFlagBox(g);
-		case "baba" :
-			listBox[i][j].paintBabaBox(g);
-		case "water":
-			listBox[i][j].paintWaterBox(g);
-		
-		}	
-	}
-	
 	
 	public void notifyForUpdate()
 	{
 		repaint();
 	}
 
-	
 	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		int abscissClick = e.getX();
-		int ordinateClick = e.getY();
-		int abscissMaze = (abscissClick-10)/21;
-		int ordinateMaze = (ordinateClick-10)/21;
-		
-		System.out.println(abscissMaze);
-		System.out.println(ordinateMaze);
-		
+	public void mouseDragged(MouseEvent e) {
+		//TODO Auto-generated method stub
+		//this.mouseClicked(e);
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stubscissClick-10)/21;
+	public void mouseMoved(MouseEvent e) {
 	
-
 		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		int abscissClick = e.getX();
-		int ordinateClick = e.getY();
-		int abscissMaze = (abscissClick-10)/21;
-		int ordinateMaze = (ordinateClick-10)/21;
+		int ordinateClick = e.getX();
+		int abscissClick = e.getY();
+		int abscissMaze = (abscissClick-margin)/(1+height);
+		int ordinateMaze = (ordinateClick-margin)/(1+width);
 		
 		System.out.println(abscissMaze);
 		System.out.println(ordinateMaze);
 		
+		String text = editor.getEditorFrame().getSelectedObject();
+
+		//paintBox(this.g,text,abscissMaze,ordinateMaze);
+		level.mapUpdate(text, abscissMaze,ordinateMaze );
+		
+		editor.notifyForUpdate();
 
 	}
 
