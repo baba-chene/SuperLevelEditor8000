@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
@@ -16,6 +17,7 @@ public class LevelPreviewMouseListener extends MouseAdapter {
 		super();
 		this.levelPreview = levelPreview;
 		levelPreview.addMouseListener(this);
+		levelPreview.addMouseMotionListener(this);
 		
 	}
 	
@@ -40,17 +42,25 @@ public class LevelPreviewMouseListener extends MouseAdapter {
 		}
 	}
 	
+	public void mouseDragged(MouseEvent e) {
+		System.out.println("Je suis bien dragged");
+		this.leftClickAction(e);
+	}
+	
 	protected void rightClickAction(MouseEvent e) {
 	
 		ArrayList selectedDrawables = levelPreview.findDrawables(e.getPoint());
 		if (selectedDrawables.size() == 0) return;
 		IDrawable drawable = (IDrawable) selectedDrawables.get(0);
-		levelPreview.changeColor(drawable);
+		levelPreview.changeImage(drawable);
 	}
 	
 	protected void leftClickAction(MouseEvent e) {
 		
-		
+		ArrayList selectedDrawables = levelPreview.findDrawables(e.getPoint());
+		if (selectedDrawables.size() == 0) return;
+		IDrawable drawable = (IDrawable) selectedDrawables.get(0);
+		levelPreview.changeImage(drawable);
 	}
 	
 }

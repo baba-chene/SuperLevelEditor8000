@@ -64,13 +64,7 @@ public class Level extends Observable {
 		
 		listBox = new Box[this.hauteur][this.largeur];
 
-		for(int i=0;i<hauteur;i++) {
-			for(int j=0;j<largeur;j++) {
-
-				System.out.println(map[i][j]);
-
-			}
-		}
+		
 		
 		createBoxes();
 		
@@ -86,8 +80,7 @@ public class Level extends Observable {
 	public void mapUpdate(String newMapString,int i,int j) {
 		
 		map[i][j] = newMapString;
-		System.out.print("Coucou");
-		System.out.print(map[i][j]);
+
 		setChanged();
 		notifyObservers();
 
@@ -100,7 +93,7 @@ public class Level extends Observable {
 			for (int i = 0; i < hauteur; i++) {
 				
 				for (int j = 0; j < largeur; j++) {
-					System.out.println(margin+i*(height+1));
+					
 					listBox[i][j] = new Box(margin+i*(height+1),margin+j*(width+1),width,height);
 		
 				}

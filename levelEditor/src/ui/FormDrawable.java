@@ -7,9 +7,11 @@ public abstract class FormDrawable implements IDrawable {
 	
 	protected Rectangle rect ;
 	protected Color color;
+	protected Image image;
 	
-	public FormDrawable(Color color, Point pos, Dimension dim){
+	public FormDrawable(Color color, Image image,Point pos, Dimension dim){
 		this.color=color;
+		this.image = image;
 		this.rect = new Rectangle(pos,dim);
 	}
 	
@@ -24,4 +26,11 @@ public abstract class FormDrawable implements IDrawable {
 		
 		this.color = color;
 	}
+	
+	public void changeImage(Image image) {
+		
+		this.image = image;
+	}
+	
+	
 }

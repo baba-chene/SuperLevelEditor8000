@@ -4,10 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Point;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import level.Level;
@@ -57,11 +60,19 @@ public class EditorFrame extends JFrame {
 		int caseWidth =  screenWidth/largeurLevel;
 		int caseHeight = screenHeight/hauteurLevel;
 		
+		Image image = null;
+		try {
+			image = ImageIO.read(getClass().getResource("/images/keke.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		for (int i = 0; i < hauteurLevel; i++ ) {
 			
 			for (int j = 0; j < largeurLevel ; j++) {
 				
-				IDrawable rect = new RectangleDrawable(Color.RED, new Point(10+j*(caseWidth),10+i*(caseHeight)),new Dimension(caseHeight,caseWidth));
+				IDrawable rect = new RectangleDrawable(Color.RED, image, new Point(10+j*(caseWidth),10+i*(caseHeight)),new Dimension(caseHeight,caseWidth),this);
 				levelPreview.addDrawable(rect);
 				
 			}
@@ -69,7 +80,6 @@ public class EditorFrame extends JFrame {
 		
 		//buttonList
 		selectionPanel = new SelectionPanel(this);
-		
 		Container c = getContentPane();
 
 		c.add(levelPreview, BorderLayout.CENTER);
@@ -77,7 +87,6 @@ public class EditorFrame extends JFrame {
 		new LevelPreviewMouseListener(levelPreview);
 		
 		pack();
-		
 		this.notifyForUpdate();
 		
 	}
