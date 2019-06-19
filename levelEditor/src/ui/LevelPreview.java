@@ -1,39 +1,63 @@
 package ui;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
+import java.util.LinkedList;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JPanel;
-
-import level.Level;
 
 public class LevelPreview extends JPanel {
 
-
-	private Level level;
-	private LevelPanel levelPanel;
-	private Editor editor;
 	
-	public LevelPreview(EditorFrame editorFrame, Level level,Editor editor) {
-			
-			super();
-			
-			
-			this.level = level;
-			this.editor = editor;
-			levelPanel = new LevelPanel(level, this.editor);
-			
-		}
-
-
-	public void notifyForUpdate() {
-		levelPanel.notifyForUpdate();
+	private LinkedList drawables = new LinkedList();
+	
+	public void paint(Graphics g) {
 		
+		super.paint(g);
+		for (Iterator iter =  ((java.util.List) drawables).iterator(); iter.hasNext();) {
+			IDrawable d = (IDrawable) iter.next();
+			d.draw(g);	
+		}
+	}
+
+	public void addDrawable(IDrawable d) {
+		drawables.add(d);
+		repaint();
+	}
+
+	public void removeDrawable(IDrawable d) {
+		drawables.remove(d);
+		repaint();
+	}
+
+	public void clear() {
+		
+		drawables.clear();
+		repaint();
 	}
 	
 	
+	public void changeColor(IDrawable d) {
+		
+		d.changeColor(Color.BLUE);
+		repaint();
+
+	}
 	
 	
+	public ArrayList findDrawables(Point p) {
+		ArrayList l = new ArrayList();
+		for (Iterator iter = drawables.iterator(); iter.hasNext();) {
+			IDrawable element = (IDrawable) iter.next();
+			if(element.getRectangle().contains(p)){
+				l.add(element);
+			}
+		}
+		return l;
+	}
+
 }

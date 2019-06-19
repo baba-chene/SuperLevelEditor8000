@@ -1,15 +1,25 @@
 package level;
 
+
 import java.awt.Graphics;
 import java.util.Observable;
 
 import ui.Box;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Level extends Observable {
 
+
+
+
 	public static final int hauteur = 20;
 	public static final int largeur = 30;
-	
+	/*
 	public static final String empty = "empty";
 	public static final String baba = "baba";
 	public static final String wall = "wall";
@@ -27,7 +37,7 @@ public class Level extends Observable {
 	public static final String textwin = "textwin";
 	public static final String textdefeat = "textdefeat";
 	public static final String textblock = "textblock";
-	
+	*/
 	private String[][] map;	
 	
 	private Box[][] listBox;
@@ -39,21 +49,32 @@ public class Level extends Observable {
 	
 	public Level () {
 		
+		map=new String[hauteur][largeur];
+		for(int i=0;i<hauteur;i++) {
+			for(int j=0;j<largeur;j++) {
 
+				this.mapUpdate("empty",i,j);
+
+			}
+		}
+		
 		width = 1820/largeur;
 		height = 900/hauteur;		
 		margin = 10;
 		
 		listBox = new Box[this.hauteur][this.largeur];
 
-		map=new String[hauteur][largeur];
 		for(int i=0;i<hauteur;i++) {
 			for(int j=0;j<largeur;j++) {
-				this.mapUpdate("empty",i,j);
+
+				System.out.println(map[i][j]);
+
 			}
 		}
 		
-		createBoxes();		
+		createBoxes();
+		
+		
 	}
 
 	public String[][] getMap() {
@@ -65,7 +86,8 @@ public class Level extends Observable {
 	public void mapUpdate(String newMapString,int i,int j) {
 		
 		map[i][j] = newMapString;
-		
+		System.out.print("Coucou");
+		System.out.print(map[i][j]);
 		setChanged();
 		notifyObservers();
 
@@ -90,10 +112,10 @@ public class Level extends Observable {
 		for (int i = 0; i < hauteur; i++) {
 			
 			for (int j = 0; j < largeur; j++) {
-				
-				
+				if (i == 0 && j == 0) {
+					System.out.print(map[0][0]);
 				paintBox(g,map[i][j],i,j);
-				
+				}
 				
 			}
 		}
@@ -102,6 +124,8 @@ public class Level extends Observable {
 	
 	
 	private void paintBox(Graphics g, String mapString, int i, int j) {
+		
+		
 		
 		switch(mapString) {
 		
@@ -129,12 +153,59 @@ public class Level extends Observable {
 		return height;
 	}
 
+
 	public int getMargin() {
 		// TODO Auto-generated method stub
 		return margin;
 	}
+
+	public void save(String fileName) throws FileNotFoundException {
+		
+		if (!(fileName.endsWith(".txt"))) {
+			fileName = fileName+".txt";
+		}
+		
+		PrintWriter pw = new PrintWriter(new FileOutputStream(fileName));
+		
+		for(int i=0; i<hauteur;i++) {
+			for(int j=0; j<largeur; j++) {
+				pw.print(map[i][j]+" ");
+			}
+			pw.println("");
+		}
+		pw.close();
+	}
+
 	
 	
-	
-	
+	public void open(String fileName) throws IOException {
+		
+		BufferedReader br = null;
+		
+		br = new BufferedReader(new FileReader(fileName));
+
+		String ligne;
+		
+		this.map = new String[hauteur][largeur];
+		
+		for (int i = 0; i < hauteur; i++){
+			
+			ligne = br.readLine();
+			
+			for (int j = 0; j < largeur; j++){
+				// On découpe la ligne en mots pour remplir 'map'
+				int spacePos= ligne.indexOf(" ");
+				String object= ligne.substring(0, spacePos);
+				map[i][j]=object;
+				
+				ligne=ligne.substring(spacePos+1);
+				
+			}
+			
+			
+		}
+		br.close();
+		
+	}
+
 }

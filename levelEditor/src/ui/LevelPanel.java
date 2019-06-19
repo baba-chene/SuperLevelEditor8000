@@ -28,18 +28,16 @@ public final class LevelPanel extends JPanel implements MouseListener, MouseMoti
 	int width;
 	int height;
 	int margin;
-	Graphics  g;
-
-	Editor editor;
+	private EditorFrame editorFrame;
 	
 	
-	public LevelPanel( Level level, Editor editor)
+	public LevelPanel( Level level, EditorFrame editorFrame)
 	{
 		super();
 		this.level = level;
-		this.editor = editor;
-		editor.getEditorFrame().addMouseListener(this);
-		editor.getEditorFrame().addMouseMotionListener(this);
+		this.editorFrame=editorFrame;
+		//editorFrame.addMouseListener(this);
+		//editorFrame.addMouseMotionListener(this);
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		
@@ -53,6 +51,7 @@ public final class LevelPanel extends JPanel implements MouseListener, MouseMoti
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
+		
 		level.paintBoxes(g);
 	}
 	
@@ -63,8 +62,10 @@ public final class LevelPanel extends JPanel implements MouseListener, MouseMoti
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+
 		//TODO Auto-generated method stub
 		//this.mouseClicked(e);
+
 	}
 
 	@Override
@@ -77,18 +78,18 @@ public final class LevelPanel extends JPanel implements MouseListener, MouseMoti
 	public void mouseClicked(MouseEvent e) {
 		int ordinateClick = e.getX();
 		int abscissClick = e.getY();
-		int abscissMaze = (abscissClick-margin)/(1+height);
-		int ordinateMaze = (ordinateClick-margin)/(1+width);
+		int abscissLevel = (abscissClick-margin)/(1+height);
+		int ordinateLevel = (ordinateClick-margin)/(1+width);
 		
-		System.out.println(abscissMaze);
-		System.out.println(ordinateMaze);
+		System.out.println(abscissLevel);
+		System.out.println(ordinateLevel);
 		
-		String text = editor.getEditorFrame().getSelectedObject();
+		String text = editorFrame.getSelectedObject();
 
 		//paintBox(this.g,text,abscissMaze,ordinateMaze);
-		level.mapUpdate(text, abscissMaze,ordinateMaze );
+		level.mapUpdate(text, abscissLevel,ordinateLevel );
 		
-		editor.notifyForUpdate();
+		editorFrame.notifyForUpdate();
 
 	}
 
@@ -115,5 +116,6 @@ public final class LevelPanel extends JPanel implements MouseListener, MouseMoti
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 }

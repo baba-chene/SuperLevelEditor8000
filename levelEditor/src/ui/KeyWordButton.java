@@ -6,13 +6,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class ObjectButton extends JRadioButton implements ActionListener {
+public class KeyWordButton extends JRadioButton implements ActionListener {
 	
 	private final String name;
-	private String object;
+	private String word;
 	private final EditorFrame editorFrame;
 
-	public ObjectButton(String name, EditorFrame editorFrame, boolean state) {
+	public KeyWordButton(String name, EditorFrame editorFrame, boolean state) {
 		super(name, state);
 		
 		this.name = name;
@@ -21,14 +21,14 @@ public class ObjectButton extends JRadioButton implements ActionListener {
 		addActionListener(this);
 		
 		if (state) {
-			editorFrame.setCurrentObject(object);
+			editorFrame.setCurrentObject(word);
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		editorFrame.setCurrentObject(object);
-		editorFrame.setIsKeyWord(false);
+		editorFrame.setCurrentObject(word);
+		editorFrame.setIsKeyWord(true);
 	}
 
 }

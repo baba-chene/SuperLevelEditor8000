@@ -5,7 +5,9 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 public class ObjectList extends JPanel {
 
@@ -16,27 +18,34 @@ public class ObjectList extends JPanel {
 		
 		super();
 		this.editorFrame= editorFrame;
-		setLayout(new GridLayout(50, 2));
-		setPreferredSize(new Dimension(200, 800));
+		setLayout(new GridLayout(30, 1));
+		setPreferredSize(new Dimension(100, 700));
 		
 		
 		//Initialisation des choix
-		ArrayList<ObjectButton> radioButtons = new ArrayList<ObjectButton>();
+		ArrayList<JRadioButton> radioButtons = new ArrayList<JRadioButton>();
 		
-		radioButtons.add(new ObjectButton("empty", editorFrame, true));
-		radioButtons.add(new ObjectButton("baba", editorFrame, false));
-		radioButtons.add(new ObjectButton("wall", editorFrame, false));
-		radioButtons.add(new ObjectButton("water", editorFrame, false));
-		radioButtons.add(new ObjectButton("rock", editorFrame, false));
-		radioButtons.add(new ObjectButton("lava", editorFrame, false));
-		radioButtons.add(new ObjectButton("flag", editorFrame, false));
+		radioButtons.add(new ObjectButton("---ELEMENTS---", editorFrame, false));
+		
+		for(int i=0; i< Editor.elements.length ;i++) {
+			String element=Editor.elements[i];
+			radioButtons.add(new ObjectButton(element, editorFrame, i==0));
+		}
+		
+		radioButtons.add(new ObjectButton("---KEY WORDS---", editorFrame, false));
+		
+		for(int i=0; i< Editor.keyWords.length ;i++) {
+			String kw=Editor.keyWords[i];
+			radioButtons.add(new KeyWordButton(kw, editorFrame, false));
+		}
+		
 		
 		ObjectButtonGroup radioButtonGroup = new ObjectButtonGroup(radioButtons);
 		this.objectButtonGroup = radioButtonGroup;
 	
-
+		//add(new JLabel("	Elements"));
 		
-		for (ObjectButton e : radioButtons){
+		for (JRadioButton e : radioButtons){
 			add(e);
 		}
 	}

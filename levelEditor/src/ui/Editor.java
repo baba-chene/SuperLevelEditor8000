@@ -1,11 +1,17 @@
 package ui;
 
 import java.awt.Component;
+import java.util.Observable;
+import java.util.Observer;
 
 import level.Level;
 
-public class Editor {
+public class Editor implements Observer {
 
+	public static String[] elements = {"empty","baba","keke","rock","wall","water","lava","flag","grass"};
+	public static String[] keyWords = {"is","has","you","us","win","defeat","push","block","sink","death"};
+	
+	
 	private Level level;
 	private EditorFrame editorFrame;
 	
@@ -26,6 +32,12 @@ public class Editor {
 	public EditorFrame getEditorFrame() {
 		
 		return editorFrame;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		notifyForUpdate();
+		
 	}
 	
 	
