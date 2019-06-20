@@ -44,6 +44,7 @@ public class EditorFrame extends JFrame {
 		this.editor=editor;
 		this.level=level;
 		isKeyWord=false;
+		currentObject="empty";
 		setVisible(true);
 		setLayout(new BorderLayout());
 		
@@ -114,7 +115,7 @@ public class EditorFrame extends JFrame {
 	
 	// Pour savoir quel bloc il faut placer
 	public String getSelectedObject() {
-		if(currentMode=="text" && !isKeyWord) {
+		if(currentMode=="text" || isKeyWord) {
 			return "text"+currentObject;	
 		}
 		return currentObject;		
