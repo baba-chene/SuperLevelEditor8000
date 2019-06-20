@@ -48,6 +48,7 @@ public class EditorFrame extends JFrame {
 		setVisible(true);
 		setLayout(new BorderLayout());
 		
+		
 		//menuBar
 		fileMenuBar = new FileMenuBar(this);
 		setJMenuBar(fileMenuBar);
@@ -55,7 +56,7 @@ public class EditorFrame extends JFrame {
 		//level preview
 		levelPanel = new LevelPanel(level,this);
 		
-		levelPreview  =new LevelPreview();
+		levelPreview  =new LevelPreview(this,level);
 		levelPreview.setPreferredSize(new Dimension(screenWidth,screenHeight));
 		
 		int caseWidth =  screenWidth/largeurLevel;
@@ -63,7 +64,7 @@ public class EditorFrame extends JFrame {
 		
 		Image image = null;
 		try {
-			image = ImageIO.read(getClass().getResource("/images/keke.png"));
+			image = ImageIO.read(getClass().getResource("/images/empty.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -115,6 +116,10 @@ public class EditorFrame extends JFrame {
 	
 	// Pour savoir quel bloc il faut placer
 	public String getSelectedObject() {
+	
+		System.out.println(currentObject);
+
+		
 		if(currentMode=="text" || isKeyWord) {
 			return "text"+currentObject;	
 		}

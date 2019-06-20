@@ -13,10 +13,23 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JPanel;
 
-public class LevelPreview extends JPanel {
+import level.Level;
 
+public class LevelPreview extends JPanel {
 	
+	
+	private EditorFrame editorFrame;
 	private LinkedList drawables = new LinkedList();
+	private Level level;
+	
+	public LevelPreview(EditorFrame editorFrame, Level level) {
+		super();
+		System.out.println("Hello");
+		this.editorFrame = editorFrame;
+		this.level = level;
+		
+	}
+	
 	
 	public void paint(Graphics g) {
 		
@@ -57,15 +70,26 @@ public class LevelPreview extends JPanel {
 	
 	public void changeImage(IDrawable d) {
 		Image image = null;
+		String selectedObject = "/images/"+editorFrame.getSelectedObject()+".png";
+		System.out.println(selectedObject);
 		try {
-			image = ImageIO.read(getClass().getResource("/images/baba.png"));
+			image = ImageIO.read(getClass().getResource(selectedObject));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		d.changeImage(image);
+		
+		
 		repaint();
+	}
+	
+	
+	public void changeLevel(int x,int y) {
+		
+		level.mapUpdate(editorFrame.getSelectedObject(), x, y);
+		
 	}
 	
 	public ArrayList findDrawables(Point p) {

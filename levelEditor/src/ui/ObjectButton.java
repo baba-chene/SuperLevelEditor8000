@@ -21,13 +21,13 @@ public class ObjectButton extends JRadioButton implements ActionListener {
 		addActionListener(this);
 		
 		if (state) {
-			editorFrame.setCurrentObject(object);
+			editorFrame.setCurrentObject(name);
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		editorFrame.setCurrentObject(object);
+		editorFrame.setCurrentObject(name);
 		editorFrame.setIsKeyWord(false);
 	}
 

@@ -20,12 +20,12 @@ public class ModeSelectionButton extends JRadioButton implements ActionListener 
 		addActionListener(this);
 		
 		if (state) {
-			editorFrame.setCurrentObject(mode);
+			editorFrame.setCurrentObject(name);
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		editorFrame.setCurrentObject(mode);
+		editorFrame.setCurrentMode(name);
 	}
 }

@@ -27,7 +27,7 @@ public class KeyWordButton extends JRadioButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		editorFrame.setCurrentObject(word);
+		editorFrame.setCurrentObject(name);
 		editorFrame.setIsKeyWord(true);
 	}
 
