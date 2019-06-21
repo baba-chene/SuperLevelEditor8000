@@ -71,7 +71,7 @@ public class LevelPreview extends JPanel {
 	public void changeImage(IDrawable d) {
 		Image image = null;
 		String selectedObject = "/images/"+editorFrame.getSelectedObject()+".png";
-		System.out.println(selectedObject);
+
 		try {
 			image = ImageIO.read(getClass().getResource(selectedObject));
 			image = image.getScaledInstance(45, 45, 1);
@@ -87,9 +87,38 @@ public class LevelPreview extends JPanel {
 	}
 	
 	
+	public void changeImage(String object,int i, int j) {
+		Image image = null;
+		String selectedObject = "/images/"+object+".png";
+		System.out.println(selectedObject);
+
+		Point p = new Point(i*47+11,j*47+11);
+		System.out.println(i*47);
+		ArrayList selectedDrawables = findDrawables(p);
+		System.out.println(selectedDrawables.size());
+		if (selectedDrawables.size() == 0) return;
+		System.out.println("Bernard");
+		IDrawable drawable = (IDrawable) selectedDrawables.get(0);
+		try {
+			image = ImageIO.read(getClass().getResource(selectedObject));
+			image = image.getScaledInstance(45, 45, 1);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (drawable == null) {
+			System.out.print("Bernard s'en va à ");
+		};
+		drawable.changeImage(image);
+		
+		repaint();
+	}
+	
+	
+	
 	public void changeLevel(int x,int y) {
-		System.out.println(x);
-		System.out.println(y);
+		
 		level.mapUpdate(editorFrame.getSelectedObject(), x, y);
 		
 	}

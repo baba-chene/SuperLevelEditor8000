@@ -133,7 +133,7 @@ public class EditorFrame extends JFrame {
 	}
 
 	public void open(String absolutePath) throws IOException {
-		level.open(absolutePath);
+		level.open(absolutePath,levelPreview);
 		
 	}
 	

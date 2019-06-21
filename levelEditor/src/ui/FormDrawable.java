@@ -21,6 +21,7 @@ public abstract class FormDrawable implements IDrawable {
 		return (Rectangle) rect.clone();
 	}
 	
+
 	
 	public void changeColor( Color color) {
 		
@@ -28,7 +29,7 @@ public abstract class FormDrawable implements IDrawable {
 	}
 	
 	public void changeImage(Image image) {
-		
+		System.out.println("Bernard aime Thomas");
 		this.image = image;
 	}
 	

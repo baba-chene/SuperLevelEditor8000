@@ -63,7 +63,6 @@ public class LevelPreviewMouseListener extends MouseAdapter {
 		if (selectedDrawables.size() == 0) return;
 		IDrawable drawable = (IDrawable) selectedDrawables.get(0);
 		levelPreview.changeImage(drawable);
-		levelPreview.changeImage(drawable);
 		levelPreview.changeLevel( (int) ((e.getY()-10)/(45.0+2)), (int) ((e.getX()-10)/(45.0+2)));
 	}
 	

@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.util.Observable;
 
 import ui.Box;
+import ui.LevelPreview;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -81,18 +83,6 @@ public class Level extends Observable {
 		
 		map[i][j] = newMapString;
 
-		for(int k=0;k<hauteur;k++) {
-			String line = "";
-			for(int l=0;l<largeur;l++) {
-				
-				line = line + map[k][l] + " ";
-				
-				
-			}
-			System.out.println(line);
-		}
-		
-		
 		setChanged();
 		notifyObservers();
 
@@ -183,7 +173,7 @@ public class Level extends Observable {
 
 	
 	
-	public void open(String fileName) throws IOException {
+	public void open(String fileName,LevelPreview levelPreview) throws IOException {
 		
 		BufferedReader br = null;
 		
@@ -201,8 +191,9 @@ public class Level extends Observable {
 				// On découpe la ligne en mots pour remplir 'map'
 				int spacePos= ligne.indexOf(" ");
 				String object= ligne.substring(0, spacePos);
-				map[i][j]=object;
 				
+				map[i][j]=object;
+				levelPreview.changeImage(object, j,i);
 				ligne=ligne.substring(spacePos+1);
 				
 			}
@@ -211,6 +202,12 @@ public class Level extends Observable {
 		}
 		br.close();
 		
+		for (int i = 0; i < hauteur; i++){
+			String line = "";				
+			for (int j = 0; j < largeur; j++){
+				line = line + map[i][j]+ "  ";
+			}
+			System.out.println(line);
+		}
 	}
-
 }
