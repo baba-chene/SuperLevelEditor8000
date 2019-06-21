@@ -81,6 +81,18 @@ public class Level extends Observable {
 		
 		map[i][j] = newMapString;
 
+		for(int k=0;k<hauteur;k++) {
+			String line = "";
+			for(int l=0;l<largeur;l++) {
+				
+				line = line + map[k][l] + " ";
+				
+				
+			}
+			System.out.println(line);
+		}
+		
+		
 		setChanged();
 		notifyObservers();
 

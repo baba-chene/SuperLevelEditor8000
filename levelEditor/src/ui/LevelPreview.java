@@ -74,6 +74,7 @@ public class LevelPreview extends JPanel {
 		System.out.println(selectedObject);
 		try {
 			image = ImageIO.read(getClass().getResource(selectedObject));
+			image = image.getScaledInstance(45, 45, 1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,7 +88,8 @@ public class LevelPreview extends JPanel {
 	
 	
 	public void changeLevel(int x,int y) {
-		
+		System.out.println(x);
+		System.out.println(y);
 		level.mapUpdate(editorFrame.getSelectedObject(), x, y);
 		
 	}

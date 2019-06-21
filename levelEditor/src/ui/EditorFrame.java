@@ -34,8 +34,8 @@ public class EditorFrame extends JFrame {
 	private int hauteurLevel = 20;  // Nombre de case vertical  
 	private int largeurLevel = 30; // Nombre de case horizontal
 	
-	private int screenHeight = 900; // Hauteur de la fenetre
-	private int screenWidth = 1820; // Largeur de la fenètre
+	private int screenHeight = 990; // Hauteur de la fenetre
+	private int screenWidth = 1450; // Largeur de la fenètre
 	
 	
 	public EditorFrame (Editor editor, Level level) {
@@ -59,8 +59,8 @@ public class EditorFrame extends JFrame {
 		levelPreview  =new LevelPreview(this,level);
 		levelPreview.setPreferredSize(new Dimension(screenWidth,screenHeight));
 		
-		int caseWidth =  screenWidth/largeurLevel;
-		int caseHeight = screenHeight/hauteurLevel;
+		int caseWidth =  45;
+		int caseHeight = 45;
 		
 		Image image = null;
 		try {
@@ -69,12 +69,13 @@ public class EditorFrame extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		image = image.getScaledInstance(45, 45, 1);
 		for (int i = 0; i < hauteurLevel; i++ ) {
 			
 			for (int j = 0; j < largeurLevel ; j++) {
 				
-				IDrawable rect = new RectangleDrawable(Color.RED, image, new Point(10+j*(caseWidth),10+i*(caseHeight)),new Dimension(caseHeight,caseWidth),this);
+				IDrawable rect = new RectangleDrawable(Color.RED, image, new Point(10+j*(caseWidth+2),10+i*(caseHeight+2)),new Dimension(caseHeight,caseWidth),this);
+				
 				levelPreview.addDrawable(rect);
 				
 			}

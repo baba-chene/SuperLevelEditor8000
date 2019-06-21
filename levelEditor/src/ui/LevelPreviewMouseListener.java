@@ -48,12 +48,12 @@ public class LevelPreviewMouseListener extends MouseAdapter {
 	}
 	
 	protected void rightClickAction(MouseEvent e) {
-	
+		System.out.println("Mais où est l'erreur ? Cherche bien jeune padawan");
 		ArrayList selectedDrawables = levelPreview.findDrawables(e.getPoint());
 		if (selectedDrawables.size() == 0) return;
 		IDrawable drawable = (IDrawable) selectedDrawables.get(0);
 		levelPreview.changeImage(drawable);
-		levelPreview.changeLevel(e.getX(), e.getY());
+		levelPreview.changeLevel(e.getX()/(45+2), e.getY()/(45+2));
 		
 	}
 	
@@ -63,6 +63,8 @@ public class LevelPreviewMouseListener extends MouseAdapter {
 		if (selectedDrawables.size() == 0) return;
 		IDrawable drawable = (IDrawable) selectedDrawables.get(0);
 		levelPreview.changeImage(drawable);
+		levelPreview.changeImage(drawable);
+		levelPreview.changeLevel( (int) ((e.getY()-10)/(45.0+2)), (int) ((e.getX()-10)/(45.0+2)));
 	}
 	
 }
