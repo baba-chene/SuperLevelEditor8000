@@ -8,8 +8,8 @@ import level.Level;
 
 public class Editor implements Observer {
 
-	public static String[] elements = {"empty","baba","keke","rock","wall","water","lava","flag","grass","lego","bush"};
-	public static String[] keyWords = {"is","has","and","you","p1","p2","us","win","defeat","push","block","sink","death","move"};
+	public static String[] elements = {"empty","baba","keke","rock","wall","water","lava","flag","grass","lego","bush","skull","box","love","tree","palm"};
+	public static String[] keyWords = {"is","has","and","you","p1","p2","us","win","kill","push","block","sink","move","weak","shut","open","hug"};
 	
 	
 	private Level level;
